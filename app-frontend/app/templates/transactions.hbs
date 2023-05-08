@@ -1,11 +1,30 @@
 <h1>Transactions</h1>
 <TransactionForm />
+{{#with (first @model) as |lastTransaction| }}
+
+  <div data-type="transaction"
+       data-account="{{lastTransaction.accountId}}"
+       data-amount="{{lastTransaction.amount}}"
+       data-balance="{{lastTransaction.accountBalance}}">
+    {{#if (isNegative lastTransaction.amount)}}
+      <p>Transferred £{{lastTransaction.amount}} from account {{lastTransaction.accountId}}</p>
+    {{else}}
+      <p>Transferred £{{lastTransaction.amount}} to account {{lastTransaction.accountId}}</p>
+    {{/if}}
+    <p>The current balance is £{{lastTransaction.accountBalance}}</p>
+  </div>
+
+{{/with}}
+
 {{#each (reverse @model) as |transaction| }}
   <div data-type="transaction"
        data-account="{{transaction.accounyId}}"
-       data-amount="{{transaction.amount}}"
-       data-balance="{{transaction.accountBalance}}">
-    <p>Transferred £{{transaction.amount}} from account {{transaction.accountId}}</p>
+       data-amount="{{transaction.amount}}">
+        {{#if (isNegative transaction.amount)}}
+      <p>Transferred £{{transaction.amount}} from account {{transaction.accountId}}</p>
+    {{else}}
+      <p>Transferred £{{transaction.amount}} to account {{transaction.accountId}}</p>
+    {{/if}}
 
   </div>
 {{/each}}
