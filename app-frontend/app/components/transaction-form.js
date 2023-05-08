@@ -16,6 +16,11 @@ export default class TransactionFormComponent extends Component {
     const accountId = event.target.elements['account-id'].value;
     const amount = event.target.elements.amount.value;
 
+    if (amount === '0') {
+      console.error('Invalid amount: cannot be 0');
+      return;
+    }
+
     const url = `http://localhost:8080/api/v1/transactions`;
 
     const response = await fetch(url, {
@@ -30,6 +35,7 @@ export default class TransactionFormComponent extends Component {
     });
 
     if (response.ok) {
+      event.target.reset();
       await this.store.findAll('transaction');
     } else {
       const errorData = await response;
