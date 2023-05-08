@@ -1,0 +1,10 @@
+<h1>Transactions</h1>
+
+{{#each @model as |transaction| }}
+  <div>
+    <p>{{transaction.amount}}</p>
+    <p>{{transaction.transactionId}}</p>
+    <p>{{transaction.amountId}}</p>
+    <p>{{transaction.accountBalance}}</p>
+  </div>
+{{/each}}
