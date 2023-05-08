@@ -1,0 +1,11 @@
+<form {{on "submit" this.submitTransaction}}>
+  <div>
+    <label for="account-id">Account ID:</label>
+    <input type="text" id="account-id" name="account-id" />
+  </div>
+  <div>
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" />
+  </div>
+  <button type="submit">Submit</button>
+</form>
