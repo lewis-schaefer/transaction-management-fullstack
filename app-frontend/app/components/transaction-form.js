@@ -28,5 +28,15 @@ export default class TransactionFormComponent extends Component {
         amount,
       }),
     });
+
+    if (response.ok) {
+      await this.store.findAll('transaction');
+    } else {
+      const errorData = await response;
+      console.error('Transaction failed:', errorData);
+    }
   }
+  // catch(error) {
+  //   console.error('Save transaction failed:', error);
+  // }
 }
