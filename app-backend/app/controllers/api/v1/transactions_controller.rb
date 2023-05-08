@@ -12,7 +12,7 @@ class Api::V1::TransactionsController < ApplicationController
           account_id: transaction.account_id,
           account_balance: transaction.account.balance,
           created_at: transaction.created_at
-        }}
+        } }
       }, status: :ok
     }
   end
@@ -20,35 +20,33 @@ class Api::V1::TransactionsController < ApplicationController
   def create
     # binding.pry
 
-    transaction = Transaction.new(
-      account: @account,
-      transaction_id: SecureRandom.uuid,
-      transaction_account_id: @account.account_id,
-      amount: transaction_params[:amount]
-    )
+    if @account.present?
+      transaction = Transaction.new(
+        account: @account,
+        transaction_id: SecureRandom.uuid,
+        transaction_account_id: @account.account_id,
+        amount: transaction_params[:amount]
+      )
 
-    @account.balance += transaction_params[:amount].to_f
-    @account.save!
+      @account.balance += transaction_params[:amount].to_f
+      @account.save!
 
-    if transaction.valid?
-      if transaction.save
-        # render json: {
-        #   data: {
-        #     transaction: {
-        #       transaction_id: transaction.transaction_id,
-        #       transaction_amount: transaction.amount,
-        #       account_id: transaction.account_id,
-        #       account_balance: transaction.account.balance,
-        #       created_at: transaction.created_at
-        #     }
-        #   }, status: :ok
-        # }
+      if transaction.save!
         render json: transaction, status: :created, message: 'Transaction created'
-      else
-        render json: {
-          errors: transaction.errors.full_messages
-        }, status: :unprocessable_entity
+
+      # Error codes from schema needed??
+      # else
+      #   if transaction.errors.include?(:account_id)
+      #     render json: { error: 'Specified content type not allowed' }, status: :unsupported_media_type
+      #   elsif transaction.errors.any?
+      #     render json: { errors: transaction.errors.full_messages }, status: :bad_request, message: 'Mandatory body parameters missing or have incorrect type'
+      #   else
+      #     render json: { error: 'Specified HTTP method not allowed' }, status: :method_not_allowed
+      #   end
       end
+
+    else
+      render json: { error: "Account not found" }, status: :bad_request
     end
   end
 
