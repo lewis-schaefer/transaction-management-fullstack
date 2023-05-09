@@ -5,10 +5,15 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Account.create(account_id: SecureRandom.uuid, balance: 1000)
+# Account.create(account_id: SecureRandom.uuid, balance: 1000)
 
-account = Account.first
+# account = Account.first
 
-Transaction.create!(account_id: account.id, amount: 10, transaction_id: SecureRandom.uuid, transaction_account_id: account.account_id)
-Transaction.create!(account_id: account.id, amount: 10, transaction_id: SecureRandom.uuid, transaction_account_id: account.account_id)
-Transaction.create!(account_id: account.id, amount: 10, transaction_id: SecureRandom.uuid, transaction_account_id: account.account_id)
+# Transaction.create!(account_id: account.id, amount: 10, transaction_id: SecureRandom.uuid, transaction_account_id: account.account_id)
+# Transaction.create!(account_id: account.id, amount: 10, transaction_id: SecureRandom.uuid, transaction_account_id: account.account_id)
+# Transaction.create!(account_id: account.id, amount: 10, transaction_id: SecureRandom.uuid, transaction_account_id: account.account_id)
+
+Account.create(account_id: "12345", balance: 0)
+Account.create(account_id: "23456", balance: 0)
+Account.create(account_id: "34567", balance: 0)
+Account.create(account_id: "45678", balance: 0)

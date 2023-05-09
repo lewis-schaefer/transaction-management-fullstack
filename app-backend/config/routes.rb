@@ -3,12 +3,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get '/ping', to: 'ping#show', format: :json, as: :ping
 
   namespace :api do
     namespace :v1 do
       resources :accounts, only: [:show]
       resources :transactions, only: [:show, :index, :create]
+      get '/ping', to: 'ping#show', format: :json, as: :ping
     end
   end
 end

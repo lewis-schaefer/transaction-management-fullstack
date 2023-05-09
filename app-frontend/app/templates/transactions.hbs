@@ -3,7 +3,7 @@
 <div>
   {{#with (first @model) as |lastTransaction| }}
 
-    <div data-type="transaction"
+    <div data-type=transaction
         data-account-id={{lastTransaction.accountId}}
         data-amount={{lastTransaction.amount}}
         data-balance={{lastTransaction.accountBalance}}>
@@ -20,8 +20,8 @@
   {{/with}}
 
   {{#each (reverse @model) as |transaction| }}
-    <div data-type="transaction"
-        data-account-id={{transaction.accounyId}}
+    <div data-type=transaction
+        data-account-id={{transaction.accountId}}
         data-amount={{transaction.amount}}>
       {{#if (isNegative transaction.amount)}}
         {{#with (removeSign transaction.amount) as |convertedTransaction| }}

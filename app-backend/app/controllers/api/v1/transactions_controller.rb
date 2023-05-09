@@ -26,13 +26,13 @@ class Api::V1::TransactionsController < ApplicationController
           account_balance: transaction.account.balance,
           created_at: transaction.created_at
         } }
-        } #, status: :ok
+      }, status: :ok
     }, status: :ok
   end
 
   def create
     # binding.pry
-    if transaction_params[:amount].nil? || transaction_params[:amount].empty?
+    if transaction_params[:amount].nil? # || transaction_params[:amount].empty?
       render json: { errors: "Transaction amount invalid" }, status: :bad_request, message: 'Mandatory body parameters missing or have incorrect type'
     elsif @account.present?
       transaction = Transaction.new(
@@ -47,16 +47,6 @@ class Api::V1::TransactionsController < ApplicationController
 
       if transaction.save!
         render json: transaction, status: :created, message: 'Transaction created'
-
-      # Error codes from schema needed??
-      # else
-      #   if transaction.errors.include?(:account_id)
-      #     render json: { error: 'Specified content type not allowed' }, status: :unsupported_media_type
-      #   elsif transaction.errors.any?
-      #     render json: { errors: transaction.errors.full_messages }, status: :bad_request, message: 'Mandatory body parameters missing or have incorrect type'
-      #   else
-      #     render json: { error: 'Specified HTTP method not allowed' }, status: :method_not_allowed
-      #   end
       end
 
     else
