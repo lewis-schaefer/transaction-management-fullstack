@@ -38,6 +38,7 @@ export default class TransactionFormComponent extends Component {
       event.target.reset();
       await this.store.findAll('transaction');
     } else {
+      event.target.reset();
       const errorData = await response;
       console.error('Transaction failed:', errorData);
     }

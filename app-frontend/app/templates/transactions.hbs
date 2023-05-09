@@ -4,9 +4,9 @@
   {{#with (first @model) as |lastTransaction| }}
 
     <div data-type="transaction"
-        data-account="{{lastTransaction.accountId}}"
-        data-amount="{{lastTransaction.amount}}"
-        data-balance="{{lastTransaction.accountBalance}}">
+        data-account-id={{lastTransaction.accountId}}
+        data-amount={{lastTransaction.amount}}
+        data-balance={{lastTransaction.accountBalance}}>
       {{#if (isNegative lastTransaction.amount)}}
         {{#with (removeSign lastTransaction.amount) as |convertedTransaction| }}
           <p>Transferred £{{convertedTransaction}} from account {{lastTransaction.accountId}}</p>
@@ -21,8 +21,8 @@
 
   {{#each (reverse @model) as |transaction| }}
     <div data-type="transaction"
-        data-account="{{transaction.accounyId}}"
-        data-amount="{{transaction.amount}}">
+        data-account-id={{transaction.accounyId}}
+        data-amount={{transaction.amount}}>
       {{#if (isNegative transaction.amount)}}
         {{#with (removeSign transaction.amount) as |convertedTransaction| }}
           <p>Transferred £{{convertedTransaction}} from account {{transaction.accountId}}</p>
