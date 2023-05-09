@@ -1,7 +1,20 @@
 class Api::V1::TransactionsController < ApplicationController
   before_action :set_transactions, only: [:index]
+  before_action :set_transaction, only: [:show]
   before_action :set_account, only: [:create]
   skip_before_action :verify_authenticity_token #solves the CSRF error
+
+  def show
+    render json: {
+      data: {
+        transaction_id: @transaction.transaction_id,
+        transaction_amount: @transaction.amount,
+        account_id: @transaction.account.account_id,
+        account_balance: @transaction.account.balance,
+        created_at: @transaction.created_at
+      }
+    }, status: :ok
+  end
 
   def index
     render json: {
@@ -13,14 +26,15 @@ class Api::V1::TransactionsController < ApplicationController
           account_balance: transaction.account.balance,
           created_at: transaction.created_at
         } }
-      }, status: :ok
-    }
+        } #, status: :ok
+    }, status: :ok
   end
 
   def create
     # binding.pry
-
-    if @account.present?
+    if transaction_params[:amount].nil? || transaction_params[:amount].empty?
+      render json: { errors: "Transaction amount invalid" }, status: :bad_request, message: 'Mandatory body parameters missing or have incorrect type'
+    elsif @account.present?
       transaction = Transaction.new(
         account: @account,
         transaction_id: SecureRandom.uuid,
@@ -52,6 +66,10 @@ class Api::V1::TransactionsController < ApplicationController
 
   private
 
+  def set_transaction
+    @transaction = Transaction.find_by(transaction_id: params[:id])
+  end
+
   def set_transactions
     @transactions = Transaction.all.includes(:account)
   end
@@ -61,6 +79,6 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:amount).merge(accountId: params[:accountId])
+    params.require(:transaction).permit(:amount).merge(accountId: params[:accountId])#.merge(accountId: params[:account_id])
   end
 end

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :accounts, only: [:show]
-      resources :transactions, only: [:index, :create]
+      resources :transactions, only: [:show, :index, :create]
     end
   end
 end
