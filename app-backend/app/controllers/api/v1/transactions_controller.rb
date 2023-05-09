@@ -9,7 +9,7 @@ class Api::V1::TransactionsController < ApplicationController
         transactions: @transactions.map { |transaction| {
           transaction_id: transaction.transaction_id,
           transaction_amount: transaction.amount,
-          account_id: transaction.account_id,
+          account_id: transaction.account.account_id,
           account_balance: transaction.account.balance,
           created_at: transaction.created_at
         } }
