@@ -1,11 +1,11 @@
-<form {{on "submit" this.submitTransaction}}>
-  <div>
+<form class="transaction-form-card" {{on "submit" this.submitTransaction}}>
+  <div class="form-input">
     <label for="account-id">Account ID:</label>
     <input type="text" data-type="account-id" id="account-id" name="account-id" />
   </div>
-  <div>
+  <div class="form-input">
     <label for="amount">Amount:</label>
     <input type="number" data-type="amount" id="amount" name="amount" />
   </div>
-  <button type="submit" data-type="transaction-submit">Submit</button>
+  <button class="form-submit-button" type="submit" data-type="transaction-submit">Submit</button>
 </form>

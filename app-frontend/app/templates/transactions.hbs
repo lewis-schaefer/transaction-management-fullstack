@@ -1,36 +1,49 @@
-<h1>Transactions</h1>
-<TransactionForm />
-<div>
-  {{#with (first @model) as |lastTransaction| }}
+<div class="transactions-container">
 
-    <div data-type=transaction
-        data-account-id={{lastTransaction.accountId}}
-        data-amount={{lastTransaction.amount}}
-        data-balance={{lastTransaction.accountBalance}}>
-      {{#if (isNegative lastTransaction.amount)}}
-        {{#with (removeSign lastTransaction.amount) as |convertedTransaction| }}
-          <p>Transferred £{{convertedTransaction}} from account {{lastTransaction.accountId}}</p>
-        {{/with}}
-      {{else}}
-        <p>Transferred £{{lastTransaction.amount}} to account {{lastTransaction.accountId}}</p>
-      {{/if}}
-      <p>The current balance is £{{lastTransaction.accountBalance}}</p>
-    </div>
-    <br />
-  {{/with}}
+  <div class="transaction-form">
+    <h2>Submit new transaction</h2>
+    <TransactionForm />
+  </div>
 
-  {{#each (reverse @model) as |transaction| }}
-    <div data-type=transaction
-        data-account-id={{transaction.accountId}}
-        data-amount={{transaction.amount}}>
-      {{#if (isNegative transaction.amount)}}
-        {{#with (removeSign transaction.amount) as |convertedTransaction| }}
-          <p>Transferred £{{convertedTransaction}} from account {{transaction.accountId}}</p>
-        {{/with}}
-      {{else}}
-        <p>Transferred £{{transaction.amount}} to account {{transaction.accountId}}</p>
-      {{/if}}
+  <div class="transaction-content">
+    <div>
+      <h2>Transaction history</h2>
     </div>
-    <br />
-  {{/each}}
+    <div>
+      {{#with (first @model) as |lastTransaction| }}
+
+        <div class="transaction-card"
+             data-type=transaction
+             data-account-id={{lastTransaction.accountId}}
+             data-amount={{lastTransaction.amount}}
+             data-balance={{lastTransaction.accountBalance}}>
+          {{#if (isNegative lastTransaction.amount)}}
+            {{#with (removeSign lastTransaction.amount) as |convertedTransaction| }}
+              <p>Transferred £{{convertedTransaction}} from account {{lastTransaction.accountId}}</p>
+            {{/with}}
+          {{else}}
+            <p>Transferred £{{lastTransaction.amount}} to account {{lastTransaction.accountId}}</p>
+          {{/if}}
+          <p>The current balance is £{{lastTransaction.accountBalance}}</p>
+        </div>
+        <br />
+      {{/with}}
+
+      {{#each (reverse @model) as |transaction| }}
+        <div class="transaction-card"
+             data-type=transaction
+             data-account-id={{transaction.accountId}}
+             data-amount={{transaction.amount}}>
+          {{#if (isNegative transaction.amount)}}
+            {{#with (removeSign transaction.amount) as |convertedTransaction| }}
+              <p>Transferred £{{convertedTransaction}} from account {{transaction.accountId}}</p>
+            {{/with}}
+          {{else}}
+            <p>Transferred £{{transaction.amount}} to account {{transaction.accountId}}</p>
+          {{/if}}
+        </div>
+        <br />
+      {{/each}}
+    </div>
+  </div>
 </div>

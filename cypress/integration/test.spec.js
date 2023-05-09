@@ -23,7 +23,7 @@ describe('Transaction Management Backend - Level 2', () => {
 
   it('should create a transaction, read it, and fetch the updated account balance', () => {
     // const accountId = uuid()
-    const accountId = "12345"
+    const accountId = "54b58b00-b48b-45f7-a839-ec4a683667d7"
     let transactionId
     cy.request({
       failOnStatusCode: false,
@@ -64,7 +64,7 @@ describe('Transaction Management Backend - Level 2', () => {
 
   it('should create transactions with negative amounts', () => {
     // const accountId = uuid()
-    const accountId = "23456"
+    const accountId = "25ad2792-eb37-4851-8288-59c52e9a14e2"
     let transactionId
 
     cy.request({
@@ -125,7 +125,7 @@ describe('Transaction Management Frontend - Level 2', () => {
 
     // submit a transaction & verify the position on the list
     // const accountId = uuid()
-    const accountId = "34567"
+    const accountId = "2026d3b5-c4c8-4062-bd68-ca5b2d52dfe1"
     const amount = 30
     const balance = 30
     cy.get('[data-type=account-id]').type(accountId)
@@ -143,7 +143,7 @@ describe('Transaction Management Frontend - Level 2', () => {
 
     // submit another transaction & verify the position on the list
     // const anotherAccountId = uuid()
-    const anotherAccountId = "45678"
+    const anotherAccountId = "d8bcd7ef-7a3c-46c9-9d36-badd62e3e242"
     const anotherAmount = 7
     const anotherBalance = 7
     cy.get('[data-type=account-id]').type(anotherAccountId)

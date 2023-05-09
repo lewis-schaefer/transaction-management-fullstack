@@ -13,7 +13,7 @@
 # Transaction.create!(account_id: account.id, amount: 10, transaction_id: SecureRandom.uuid, transaction_account_id: account.account_id)
 # Transaction.create!(account_id: account.id, amount: 10, transaction_id: SecureRandom.uuid, transaction_account_id: account.account_id)
 
-Account.create(account_id: "12345", balance: 0)
-Account.create(account_id: "23456", balance: 0)
-Account.create(account_id: "34567", balance: 0)
-Account.create(account_id: "45678", balance: 0)
+Account.create(account_id: "54b58b00-b48b-45f7-a839-ec4a683667d7", balance: 0)
+Account.create(account_id: "25ad2792-eb37-4851-8288-59c52e9a14e2", balance: 0)
+Account.create(account_id: "2026d3b5-c4c8-4062-bd68-ca5b2d52dfe1", balance: 0)
+Account.create(account_id: "d8bcd7ef-7a3c-46c9-9d36-badd62e3e242", balance: 0)
