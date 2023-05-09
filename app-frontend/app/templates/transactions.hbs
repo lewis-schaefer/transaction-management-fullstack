@@ -9,13 +9,14 @@
         data-balance="{{lastTransaction.accountBalance}}">
       {{#if (isNegative lastTransaction.amount)}}
         {{#with (removeSign lastTransaction.amount) as |convertedTransaction| }}
-          <p>Transferred £{{convertedTransaction}} from account {{convertedTransaction}}</p>
+          <p>Transferred £{{convertedTransaction}} from account {{lastTransaction.accountId}}</p>
         {{/with}}
       {{else}}
         <p>Transferred £{{lastTransaction.amount}} to account {{lastTransaction.accountId}}</p>
       {{/if}}
       <p>The current balance is £{{lastTransaction.accountBalance}}</p>
     </div>
+    <br />
   {{/with}}
 
   {{#each (reverse @model) as |transaction| }}
@@ -24,11 +25,12 @@
         data-amount="{{transaction.amount}}">
       {{#if (isNegative transaction.amount)}}
         {{#with (removeSign transaction.amount) as |convertedTransaction| }}
-          <p>Transferred £{{convertedTransaction}} from account {{convertedTransaction}}</p>
+          <p>Transferred £{{convertedTransaction}} from account {{transaction.accountId}}</p>
         {{/with}}
       {{else}}
         <p>Transferred £{{transaction.amount}} to account {{transaction.accountId}}</p>
       {{/if}}
     </div>
+    <br />
   {{/each}}
 </div>
