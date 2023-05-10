@@ -7,7 +7,11 @@ class Api::V1::TransactionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    render json: transaction_hash(@transaction), status: :ok
+    if @transaction
+      render json: transaction_hash(@transaction), status: :ok
+    else
+      render json: { error: "Transaction not found" }, status: :not_found
+    end
   end
 
   def index
@@ -24,7 +28,11 @@ class Api::V1::TransactionsController < ApplicationController
       end
     end
 
-    new_transaction
+    if transaction_params[:amount].to_i.zero?
+      render json: { errors: "Transaction amount invalid" }, status: :bad_request
+    else
+      new_transaction
+    end
   end
 
   private
@@ -73,7 +81,7 @@ class Api::V1::TransactionsController < ApplicationController
       @account.save!
       render json: transaction, status: :created, message: 'Transaction created'
     else
-      render json: { errors: "Transaction amount invalid" }, status: :bad_request, message: 'Mandatory body parameters missing or have incorrect type'
+      render json: { errors: "Transaction invalid" }, status: :bad_request
     end
   end
 end

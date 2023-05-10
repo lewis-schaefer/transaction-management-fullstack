@@ -5,5 +5,5 @@ class Transaction < ApplicationRecord
   validates :transaction_account_id, presence: true
   validates :amount, presence: true
   validates :account_id, presence: true
-  validates :amount, numericality: { other_than: 0 }
+  validates :amount, numericality: true
 end
