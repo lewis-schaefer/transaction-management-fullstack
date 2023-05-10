@@ -22,8 +22,7 @@ describe('Transaction Management Backend - Level 2', () => {
   })
 
   it('should create a transaction, read it, and fetch the updated account balance', () => {
-    // const accountId = uuid()
-    const accountId = "54b58b00-b48b-45f7-a839-ec4a683667d7"
+    const accountId = uuid()
     let transactionId
     cy.request({
       failOnStatusCode: false,
@@ -33,8 +32,7 @@ describe('Transaction Management Backend - Level 2', () => {
         "Content-Type": "application/json"
       },
       body: {
-        // account_id: accountId,
-        accountId: accountId,
+        account_id: accountId,
         amount: 7
       }
     }).then((response) => {
@@ -47,9 +45,9 @@ describe('Transaction Management Backend - Level 2', () => {
         url: `${apiUrl}/transactions/${transactionId}`,
       }).then((response) => {
         expect(response.status).to.eq(200)
-        expect(response.body.data.transaction_id).to.eq(transactionId)
-        expect(response.body.data.account_id).to.eq(accountId)
-        expect(response.body.data.transaction_amount).to.eq(7)
+        expect(response.body.transaction_id).to.eq(transactionId)
+        expect(response.body.account_id).to.eq(accountId)
+        expect(response.body.amount).to.eq(7)
       })
     }).request({
       failOnStatusCode: false,
@@ -57,14 +55,13 @@ describe('Transaction Management Backend - Level 2', () => {
       url: `${apiUrl}/accounts/${accountId}`,
     }).then((response) => {
       expect(response.status).to.eq(200)
-      expect(response.body.data.account_id).to.eq(accountId)
-      expect(response.body.data.balance).to.eq(7)
+      expect(response.body.account_id).to.eq(accountId)
+      expect(response.body.balance).to.eq(7)
     })
   })
 
   it('should create transactions with negative amounts', () => {
-    // const accountId = uuid()
-    const accountId = "25ad2792-eb37-4851-8288-59c52e9a14e2"
+    const accountId = uuid()
     let transactionId
 
     cy.request({
@@ -75,8 +72,7 @@ describe('Transaction Management Backend - Level 2', () => {
         "Content-Type": "application/json",
       },
       body: {
-        // account_id: accountId,
-        accountId: accountId,
+        account_id: accountId,
         amount: 4
       }
     }).then((response) => {
@@ -89,8 +85,8 @@ describe('Transaction Management Backend - Level 2', () => {
       url: `${apiUrl}/accounts/${accountId}`,
     }).then((response) => {
       expect(response.status).to.eq(200)
-      expect(response.body.data.account_id).to.eq(accountId)
-      expect(response.body.data.balance).to.eq(4)
+      expect(response.body.account_id).to.eq(accountId)
+      expect(response.body.balance).to.eq(4)
     }).request({
       failOnStatusCode: false,
       method: 'POST',
@@ -99,8 +95,7 @@ describe('Transaction Management Backend - Level 2', () => {
         "Content-Type": "application/json",
       },
       body: {
-        // account_id: accountId,
-        accountId: accountId,
+        account_id: accountId,
         amount: -3
       }
     }).then((response) => {
@@ -113,8 +108,8 @@ describe('Transaction Management Backend - Level 2', () => {
       url: `${apiUrl}/accounts/${accountId}`,
     }).then((response) => {
       expect(response.status).to.eq(200)
-      expect(response.body.data.account_id).to.eq(accountId)
-      expect(response.body.data.balance).to.eq(1)
+      expect(response.body.account_id).to.eq(accountId)
+      expect(response.body.balance).to.eq(1)
     })
   })
 })
@@ -124,8 +119,7 @@ describe('Transaction Management Frontend - Level 2', () => {
     cy.visit('/')
 
     // submit a transaction & verify the position on the list
-    // const accountId = uuid()
-    const accountId = "2026d3b5-c4c8-4062-bd68-ca5b2d52dfe1"
+    const accountId = uuid()
     const amount = 30
     const balance = 30
     cy.get('[data-type=account-id]').type(accountId)
@@ -142,8 +136,7 @@ describe('Transaction Management Frontend - Level 2', () => {
     cy.get(`[data-type=transaction][data-account-id=${accountId}][data-amount=${newAmount}][data-balance=${newBalance}]`).should('exist')
 
     // submit another transaction & verify the position on the list
-    // const anotherAccountId = uuid()
-    const anotherAccountId = "d8bcd7ef-7a3c-46c9-9d36-badd62e3e242"
+    const anotherAccountId = uuid()
     const anotherAmount = 7
     const anotherBalance = 7
     cy.get('[data-type=account-id]').type(anotherAccountId)

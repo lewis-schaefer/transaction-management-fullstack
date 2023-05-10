@@ -3,14 +3,12 @@ class Api::V1::AccountsController < ApplicationController
 
   def show
     render json: {
-      data: {
-        account_id: @account.account_id,
-        balance: @account.balance,
-        transactions: @account.transactions.map { |transaction|
-          {
-            transaction_id: transaction.transaction_id,
-            transaction_amount: transaction.amount,
-          }
+      account_id: @account.account_id,
+      balance: @account.balance,
+      transactions: @account.transactions.map { |transaction|
+        {
+          transaction_id: transaction.transaction_id,
+          amount: transaction.amount
         }
       }
     }, status: :ok

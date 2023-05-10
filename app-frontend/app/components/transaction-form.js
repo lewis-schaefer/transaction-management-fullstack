@@ -29,8 +29,8 @@ export default class TransactionFormComponent extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        accountId,
-        amount,
+        account_id: accountId,
+        amount: amount,
       }),
     });
 
@@ -43,7 +43,7 @@ export default class TransactionFormComponent extends Component {
       console.error('Transaction failed:', errorData);
     }
   }
-  // catch(error) {
-  //   console.error('Save transaction failed:', error);
-  // }
+  catch(error) {
+    console.error('Save transaction failed:', error);
+  }
 }
