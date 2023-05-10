@@ -24,11 +24,6 @@ class Api::V1::TransactionsController < ApplicationController
       end
     end
 
-    # if transaction_params[:amount].nil? || transaction_params[:amount] == 0
-    #   render json: { errors: "Transaction amount invalid" }, status: :bad_request, message: 'Mandatory body parameters missing or have incorrect type'
-    # else
-    #   new_transaction
-    # end
     new_transaction
   end
 
