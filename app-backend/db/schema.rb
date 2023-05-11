@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_05_10_094659) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "accounts", force: :cascade do |t|
     t.string "account_id"
     t.integer "balance"
@@ -27,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_094659) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.bigint "account_id", null: false
+    t.integer "account_id", null: false
     t.string "transaction_id"
     t.integer "amount"
     t.string "transaction_account_id"
