@@ -69,10 +69,9 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def new_transaction
-    transaction = Transaction.create(
+    transaction = Transaction.new(
       account_id: @account.id,
       transaction_id: SecureRandom.uuid,
-      transaction_account_id: @account.account_id,
       amount: transaction_params[:amount]
     )
 
