@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_05_093953) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_08_190025) do
   create_table "accounts", force: :cascade do |t|
     t.string "account_id"
     t.integer "balance"
