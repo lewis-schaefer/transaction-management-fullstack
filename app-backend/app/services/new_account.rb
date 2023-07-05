@@ -1,4 +1,3 @@
-# require_relative '../models/account'
 class NewAccount
   def initialize(account_id)
     @account_id = account_id

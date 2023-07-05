@@ -1,5 +1,3 @@
-# require_relative '../../services/api/new_account'
-
 class Api::V1::TransactionsController < ApplicationController
   before_action :set_transactions, only: [:index]
   before_action :set_transaction, only: [:show]
