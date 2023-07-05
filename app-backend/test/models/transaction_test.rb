@@ -85,7 +85,7 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
 
     transaction = Transaction.last
     assert_equal account, transaction.account
-    assert_equal -12, transaction.amount
+    assert_equal (-12), transaction.amount
     assert_equal 88, transaction.account.balance
 
     puts "Transaction cannot be made with negative amount"
