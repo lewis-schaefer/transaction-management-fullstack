@@ -4,10 +4,8 @@ one:
   account: one
   transaction_id: MyString
   amount: 1
-  transaction_account_id: MyString
 
 two:
   account: two
   transaction_id: MyString
   amount: 1
-  transaction_account_id: MyString

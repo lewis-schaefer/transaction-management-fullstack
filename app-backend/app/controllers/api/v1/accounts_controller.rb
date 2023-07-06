@@ -20,7 +20,4 @@ class Api::V1::AccountsController < ApplicationController
     @account = Account.find_by(account_id: params[:id])
   end
 
-  def account_params
-    @account = Account.find_by(account_id: params[:id])
-  end
 end

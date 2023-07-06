@@ -1,4 +1,4 @@
-class NewAccount < ApplicationRecord
+class NewAccount
   def initialize(account_id)
     @account_id = account_id
   end
