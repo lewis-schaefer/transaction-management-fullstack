@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class Api::V1::TransactionsControllerTest < ActionController::TestCase
-  test "should create transaction with all required attributes" do
+  test 'should create transaction with all required attributes' do
     account = Account.create(account_id: SecureRandom.uuid, balance: 0)
 
     assert_difference("Transaction.count") do
